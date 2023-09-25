@@ -27,7 +27,7 @@ namespace FlightsWPF.ViewModels
 
         protected bool SetValue<T>(string propertyName, object value)
         {
-            if (backingFields.ContainsKey(propertyName) || backingFields[propertyName] != value)
+            if (!backingFields.ContainsKey(propertyName) || backingFields[propertyName] != value)
             {
                 backingFields[propertyName] = value;
                 NotifyPropertyChanged(propertyName);
