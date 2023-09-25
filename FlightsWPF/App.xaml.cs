@@ -38,10 +38,6 @@ namespace FlightsWPF
         {
             await Hosting!.StopAsync();
 
-            var mainWindow = Services.GetRequiredService<MainWindow>();
-            mainWindow!.DataContext = Services.GetRequiredService<MainWindowVM>();
-            mainWindow!.Show();
-
             base.OnStartup(e);
 
             Logger.Debug("Application builded");
@@ -63,9 +59,9 @@ namespace FlightsWPF
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<MainWindow>();
             services.AddSingleton<IAppService, AppService>();
             services.AddSingleton<MainWindowVM>();
+            services.AddSingleton<MainWindow>();
         }
     }
 }
