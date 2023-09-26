@@ -4,26 +4,76 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:m="clr-namespace:FlightsWPF.Models"
-        mc:Ignorable="d"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="620">
     <Window.Resources>
+        
         <DataTemplate DataType="{x:Type m:FlightInfoVM}">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding FlightNumber}" />
-                    <TextBlock Text="{Binding DepartureTime}" />
+            <DockPanel Margin="10">
+                <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Flight number" Margin="10 0 10 0"/>
+                        <TextBox Text="{Binding FlightNumber}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Departure time" Margin="10 0 10 0"/>
+                        <TextBox Text="{Binding DepartureTime}"/>
+                    </StackPanel>
                 </StackPanel>
-                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Passengers}">
-
+                
+                <DataGrid DockPanel.Dock="Bottom" 
+                          AutoGenerateColumns="False" CanUserReorderColumns="True"
+                          ItemsSource="{Binding Passengers}">
+                    
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="First Name" Width="175" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding FirstName}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="Second Name" Width="175" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding LastName}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="Patronomyc" Width="175" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Patronomyc}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Width="25" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button BorderThickness="0" x:Name="DeleteButton" ToolTip="Remove" Background="Transparent">
+                                        <Image Height="12" Width="12" Stretch="Uniform" Margin="0" Source="{StaticResource ImageRemoveSegment}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
+            </DockPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type CollectionContainer}">
+            <StackPanel Orientation="Vertical">
+                
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
     <Grid>
-        <ContentControl Content="{Binding First}">
-            
-        </ContentControl>
+        <ListView ItemsSource="{Binding Flights}">
+
+        </ListView>
     </Grid>
 </Window>

@@ -18,14 +18,13 @@ namespace FlightsWPF
     /// </summary>
     public partial class App : Application
     {
-        public static IHost? Hosting { get; private set; }
-        public static IServiceProvider Services => Hosting?.Services;
-        public App()
-        {
-            Hosting = Host.CreateDefaultBuilder()
+
+        public static IHost? Hosting = Host.CreateDefaultBuilder()
                         .ConfigureServices(ConfigureServices)
                         .Build();
-
+        public static IServiceProvider Services => Hosting!.Services;
+        public App()
+        {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File(string.Join("/", Environment.CurrentDirectory, "log.txt"))
@@ -36,8 +35,6 @@ namespace FlightsWPF
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            await Hosting!.StopAsync();
-
             base.OnStartup(e);
 
             Logger.Debug("Application builded");
@@ -49,12 +46,15 @@ namespace FlightsWPF
                 MessageBox.Show("Error", message, MessageBoxButton.OK);
                 ea.Handled = true;
             };
+
+            await Hosting!.StartAsync().ConfigureAwait(false);
         }
 
         protected override async void OnExit(ExitEventArgs e)
         {
-            await Hosting!.StopAsync();
             base.OnExit(e);
+            await Hosting!.StopAsync();
+            Hosting.Dispose();
         }
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)

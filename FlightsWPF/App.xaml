@@ -4,6 +4,13 @@
              xmlns:vm="clr-namespace:FlightsWPF.ViewModels"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <vm:ViewModelLocator x:Key="Locator" />
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FlightsWPF;component/Themes/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/FlightsWPF;component/Themes/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/FlightsWPF;component/Themes/Images.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

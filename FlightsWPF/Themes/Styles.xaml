@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="FontSize">13</sys:Double>
+
+    <SolidColorBrush x:Key="BrushBackground" Color="{DynamicResource ColorWhite}" />
+    <SolidColorBrush x:Key="BrushForeground" Color="{DynamicResource ColorBackground}" />
+    <SolidColorBrush x:Key="BrushBorders" Color="{DynamicResource ColorBorder}" />
+    <SolidColorBrush x:Key="BrushLightBackground" Color="{DynamicResource ColorLightBackground}"/>
+    <SolidColorBrush x:Key="BrushButton" Color="{DynamicResource ColorTitlesLight}" />
+
+
+    <Style TargetType="{x:Type Control}">
+        <Setter Property="Foreground" Value="{StaticResource BrushForeground}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSize}" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource BrushForeground}" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+    </Style>
+
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="Background" Value="{StaticResource BrushLightBackground}" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type Control}}">
+        <Setter Property="CaretBrush" Value="{StaticResource BrushForeground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BrushBorders}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="MinWidth" Value="150"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="{x:Type ListViewItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Style.Triggers>
+            <Trigger Property="ActualHeight" Value="4">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsVisible}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
+</ResourceDictionary>
