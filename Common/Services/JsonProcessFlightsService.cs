@@ -1,4 +1,5 @@
 ﻿using Common.Types;
+using System.Text.Json;
 
 namespace Common.Services
 {
@@ -15,7 +16,12 @@ namespace Common.Services
 
         public void Save(List<FlightInfo> entity, string path)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(entity);
+
+            using (var output = new StreamWriter(Path.Combine(Environment.CurrentDirectory, path)))
+            {
+                output.WriteLine(json);
+            }
         }
 
         public JsonProcessFlightsService()

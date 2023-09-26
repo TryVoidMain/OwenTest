@@ -24,7 +24,7 @@ namespace FlightsWPF.ViewModels
         }
 
         public FlightInfoVM First => Flights.First();
-        public MainWindowVM(IAppService appService)
+        public MainWindowVM(IAppService appService, IProcessService<List<FlightInfo>> process)
         {
             _appService = appService;
             Title = "Owen Test";
@@ -52,6 +52,32 @@ namespace FlightsWPF.ViewModels
                     }
                 }
             };
+
+            var flights = new List<FlightInfo>()
+            {
+                new FlightInfo()
+                {
+                    DepartureTime = DateTime.Now,
+                    FlightNumber = "First flight number",
+                    Passengers = new List<Passenger>()
+                    {
+                        new Passenger("Vasya", "Pupkin", "Vasiliyevich"),
+                        new Passenger("Akakii", "Petrov", "Petrovich")
+                    }
+                },
+                new FlightInfo()
+                {
+                    DepartureTime = DateTime.Now,
+                    FlightNumber = "Second flight number",
+                    Passengers = new List<Passenger>()
+                    {
+                        new Passenger("Vasya", "Vasiliev", "Vasiliyevich"),
+                        new Passenger("Petr", "Petrov", "Petrovich")
+                    }
+                }
+            };
+
+            process.Save(flights, "jsonoutput.txt");
         }
     }
 }

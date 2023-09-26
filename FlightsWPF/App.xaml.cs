@@ -60,6 +60,7 @@ namespace FlightsWPF
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             services.AddSingleton<IAppService, AppService>();
+            services.AddSingleton<IProcessService<List<FlightInfo>>, JsonProcessFlightsService>();
             services.AddSingleton<MainWindowVM>();
             services.AddSingleton<MainWindow>();
         }
