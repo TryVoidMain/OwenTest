@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace FlightsWPF.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class PropertyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

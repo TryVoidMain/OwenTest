@@ -43,7 +43,7 @@ namespace FlightsWPF
             {
                 var message = $"{ea.Exception.Message}";
                 Logger.Fatal(ea.Exception.ToString());
-                MessageBox.Show("Error", message, MessageBoxButton.OK);
+                MessageBox.Show(message, "Error", MessageBoxButton.OK);
                 ea.Handled = true;
             };
 
@@ -59,8 +59,7 @@ namespace FlightsWPF
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<IAppService, AppService>();
-            services.AddSingleton<IProcessService<List<FlightInfo>>, JsonProcessFlightsService>();
+            services.AddSingleton<IFlightsService, FlightsService>();
             services.AddSingleton<MainWindowVM>();
             services.AddSingleton<MainWindow>();
         }

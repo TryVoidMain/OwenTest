@@ -10,7 +10,6 @@
     <SolidColorBrush x:Key="BrushLightBackground" Color="{DynamicResource ColorLightBackground}"/>
     <SolidColorBrush x:Key="BrushButton" Color="{DynamicResource ColorTitlesLight}" />
 
-
     <Style TargetType="{x:Type Control}">
         <Setter Property="Foreground" Value="{StaticResource BrushForeground}"/>
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
@@ -53,8 +52,5 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-
-
-
 
 </ResourceDictionary>
