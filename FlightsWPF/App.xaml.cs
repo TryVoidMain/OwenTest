@@ -52,6 +52,7 @@ namespace FlightsWPF
 
         protected override async void OnExit(ExitEventArgs e)
         {
+            Log.Debug("Application closed");
             base.OnExit(e);
             await Hosting!.StopAsync();
             Hosting.Dispose();

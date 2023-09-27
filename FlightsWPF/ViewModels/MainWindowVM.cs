@@ -1,17 +1,13 @@
 ﻿using Common.Services;
 using Common.Types;
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using FlightsWPF.Models;
 using System.Linq;
 using FlightsWPF.ViewModels.Base;
-using System.Net.Http.Headers;
 using Microsoft.Win32;
 using FlightsWPF.Helpers.Extensions;
-using System.Runtime;
-using System.Collections.Specialized;
-using System.Windows.Documents;
+using Serilog;
 
 namespace FlightsWPF.ViewModels
 {
@@ -90,7 +86,7 @@ namespace FlightsWPF.ViewModels
         private void LoadFileExecute()
         {
 
-            var openFileDialod = new OpenFileDialog();
+            var openFileDialod = new OpenFileDialog() { Filter = "Файлы json|*.json" } ;
 
             if (openFileDialod.ShowDialog().Value)
             {
@@ -103,12 +99,15 @@ namespace FlightsWPF.ViewModels
                     Flights.Add(flight.CastToFlightVM());
 
                 LoadedFilePath = filePath;
+
+                Log.Information($"File loaded: {filePath}");
             }
+
         }
 
         private void SaveFileExecute()
         {
-            var saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog() { Filter = "Файлы json|*.json" };
 
             if (saveFileDialog.ShowDialog().Value)
             {
@@ -120,6 +119,8 @@ namespace FlightsWPF.ViewModels
                     flights.Add(flight.CastToFlight());
                 }
                 _flightsService.Save(flights, filePath);
+
+                Log.Information($"File saved: {filePath}");
             }
         }
 
@@ -132,6 +133,8 @@ namespace FlightsWPF.ViewModels
                     var pass = flight.Passengers.Find(p => p.Id == passengerVM.Id);
                     flight.Passengers.Remove(pass);
 
+                    Log.Information($"Passenger {passengerVM.FirstName}-{passengerVM.LastName}-{passengerVM.Patronomyc} were removed from flight: {SelectedFlight.FlightNumber}");
+
                     Flights.Refresh();
                 }
         }
@@ -139,8 +142,11 @@ namespace FlightsWPF.ViewModels
         private void AddNewPassengerExecute()
         {
             if (SelectedFlight != null)
+            {
                 SelectedFlight.Passengers.Add(new PassengerVM("FirstName", "LastName", "Patronomyc"));
-            Flights.Refresh();
+                Log.Information($"New passenger were added to flight: {SelectedFlight.FlightNumber}");
+                Flights.Refresh();
+            }
         }
 
         private void AddNewFlightExecute()
@@ -154,6 +160,8 @@ namespace FlightsWPF.ViewModels
                     new PassengerVM("FirstName", "LastName", "Patronomyc")
                 }
             });
+
+            Log.Information($"New flight info added");
         }
     }
 }
