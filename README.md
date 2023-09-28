@@ -22,11 +22,11 @@
 рейсе из файла, сохранение информации о рейсе в файл, добавление информации о рейсе, добавление
 пассажиров на рейс, удаление пассажиров на рейс.
 
-![image](https://github.com/TryVoidMain/OwenTest/assets/64310742/6e4addb8-8968-4b90-93a8-b18e98298ae7)
+![image](https://github.com/TryVoidMain/OwenTest/assets/64310742/41250a8b-d23a-48b6-aeb4-ea8f5e85317e)
 
 После загрузки из файла, появляется возможность редактировать информацию о рейсах и пассажиров.
 
-![image](https://github.com/TryVoidMain/OwenTest/assets/64310742/2a89a6c3-b3ea-4c3a-b51c-7a8b5d38db75)
+![image](https://github.com/TryVoidMain/OwenTest/assets/64310742/4d11fb30-a41b-463d-b932-3d86f91acc20)
 
 Загрузка и сохранение файлов производится в JSON формате. В корневой директории лежит файл jsonoutput.json
 с сохранёнными данными. Структура Json следующая:
